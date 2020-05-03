@@ -1,24 +1,32 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import Cards from "./Cards.js";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Card from "./Cards";
 
-function Characters() {
-    const [char, setChar] = useState([]);
-    useEffect(() => {
-        axios.get('https://swapi.co/api/people/')
-            .then(res => {
-                setChar(res.data.results)
-            })
-            .catch(err => {
-                console.log(`Data not received ${err}`)
-            })
-    }, [])
-    return (
-        <div className = "container">
-            {char.map((name, index) => {
-                return <Cards name={name} index={index}/>
-            })}
-        </div>     
-    )
+
+
+function Character() {
+
+  const [character, setCharacter] = useState([]);
+  useEffect(() => {
+    axios
+      .get("https://swapi.py4e.com/api/people")
+      .then((res) => {
+        setCharacter(res.data.results);
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  }, [character]);
+
+  return (
+    <div>
+      {character.map((data) => {
+        return <Card character={data} />;
+      })}
+      ;
+    </div>
+  );
 }
-export default Characters;
+
+
+export default Character;
